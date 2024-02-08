@@ -1,0 +1,10 @@
+# Exclude Lattice Radiant Projects
+lscc/*/*
+
+# Include Radiant Project and Option definitions
+!lscc/*/*.rdf
+!lscc/*/*.sty
+
+# Sublime Data
+*sublime-project
+*sublime-workspace
