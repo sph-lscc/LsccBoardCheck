@@ -1,4 +1,4 @@
-`include "defines.svh"
+`include "../utils/hdr/defines.svh"
 
 // Instantiate driver based on board
 module led_driver_top #( BOARD   = "XO5_EVAL" )
@@ -13,12 +13,12 @@ module led_driver_top #( BOARD   = "XO5_EVAL" )
   logic       rst_n;  //System Reset
   
 // Synchronise reset to system clk
-  sync_rst #(2)
-    sync_rst_inst (
+  sync_rstn #(2)
+    sync_rstn_inst (
       .clk_i(clk_i),
-    .rstn_i(rstn_i),
-    .rstn_o(rst_n)
-  );
+      .rstn_i(rstn_i),
+      .rstn_o(rst_n)
+    );
 
 // LED Driver (Parameters set to match target board) 
   generate 

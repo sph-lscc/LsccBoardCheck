@@ -1,4 +1,4 @@
-`include "defines.svh"
+`include "../utils/hdr/defines.svh"
 
 module svn_seg_cntr #(
   parameter CLK_IN_MHZ   = 125,
