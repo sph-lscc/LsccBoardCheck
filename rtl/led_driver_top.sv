@@ -1,4 +1,4 @@
-`include "../utils/hdr/defines.svh"
+`include "lscc_defines.svh"
 
 // Instantiate driver based on board
 module led_driver_top #( BOARD   = "XO5_EVAL" )

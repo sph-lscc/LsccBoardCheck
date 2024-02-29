@@ -1,4 +1,4 @@
-`include "../utils/rtl/defines.svh"
+`include "lscc_defines.svh"
 
 `timescale 1 ns / 1 ps
 

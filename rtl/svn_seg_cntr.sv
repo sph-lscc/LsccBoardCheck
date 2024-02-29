@@ -1,4 +1,4 @@
-`include "../utils/hdr/defines.svh"
+`include "lscc_defines.svh"
 
 module svn_seg_cntr #(
   parameter CLK_IN_MHZ   = 125,

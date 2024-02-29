@@ -3,7 +3,7 @@
 //
 // One full forward + reverse sweep per second
 //
-`include "defines.svh"
+`include "lscc_defines.svh"
 
 module led_kitt #(
   parameter CLK_IN_MHZ   = 125,
