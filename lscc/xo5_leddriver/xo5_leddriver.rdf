@@ -6,7 +6,7 @@
             <Option name="include path" value="../../utils/hdr;../../utils/rtl"/>
         </Options>
         <Source name="../../rtl/led_driver_top.sv" type="Verilog" type_short="Verilog">
-            <Options VerilogStandard="System Verilog"/>
+            <Options VerilogStandard="System Verilog" top_module="led_driver_top"/>
         </Source>
         <Source name="../../rtl/led_kitt.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
