@@ -1,7 +1,7 @@
 `include "lscc_defines.svh"
 
 // Instantiate driver based on board
-module led_driver_top #( BOARD   = "XO5_EVAL" )
+module led_driver_top #( BOARD   = "" )
 (
   input              clk_i,
   input              rstn_i,
@@ -76,7 +76,7 @@ module led_driver_top #( BOARD   = "XO5_EVAL" )
         ) svn_seg_inst (
           .clk_i(clk_i),
           .rstn_i(rst_n),
-          .display_o(seg_display_o),
+          .seg_display_o(seg_display_o),
           .seg_sel_o()
         );
       end : xo5_eval
