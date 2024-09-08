@@ -30,11 +30,14 @@ module led_driver_top #( BOARD   = "" )
           .CLK_IN_MHZ(100),
           .LED_POLARITY(1'b1)
         ) svn_seg_inst (
-          .clk_i(clk_i),
+          .clk_i,
           .rstn_i(rst_n),
-          .display_o(seg_display_o),
-          .seg_sel_o(seg_sel_o)
+          .seg_display_o,
+          .seg_sel_o
         );
+        
+        assign led_display_o = 'b0;
+        
       end : atg_versa
 
       // Avant E Eval Board
@@ -43,19 +46,19 @@ module led_driver_top #( BOARD   = "" )
           .CLK_IN_MHZ(12),
           .LED_POLARITY(1'b1)
         ) svn_seg_inst (
-          .clk_i(clk_i),
+          .clk_i,
           .rstn_i(rst_n),
-          .display_o(seg_display_o),
-          .seg_sel_o(seg_sel_o)
+          .seg_display_o,
+          .seg_sel_o
         );
 
         led_kitt # (
           .CLK_IN_MHZ(12),
           .LED_POLARITY(1'b1)
         ) led_kitt_inst (
-          .clk_i(clk_i),
+          .clk_i,
           .rstn_i(rst_n),
-          .display_o(led_display_o)
+          .led_display_o
         );
       end : ate_eval
 
@@ -65,19 +68,19 @@ module led_driver_top #( BOARD   = "" )
           .CLK_IN_MHZ(125),
           .LED_POLARITY(1'b1)
         ) led_kitt_inst (
-          .clk_i(clk_i),
+          .clk_i,
           .rstn_i(rst_n),
-          .display_o(led_display_o)
+          .led_display_o
         );
 
         svn_seg_cntr # (
           .CLK_IN_MHZ(125),
           .LED_POLARITY(1'b0)
         ) svn_seg_inst (
-          .clk_i(clk_i),
+          .clk_i,
           .rstn_i(rst_n),
-          .seg_display_o(seg_display_o),
-          .seg_sel_o()
+          .seg_display_o,
+          .seg_sel_o
         );
       end : xo5_eval
 
@@ -87,9 +90,9 @@ module led_driver_top #( BOARD   = "" )
             .CLK_IN_MHZ  (125),
             .LED_POLARITY(1'b1)
         ) led_kitt_inst (
-            .clk_i    (clk_i),
-            .rstn_i   (rst_n),
-            .display_o(led_display_o)
+            .clk_i,
+            .rstn_i(rst_n),
+            .led_display_o
         );
 
         assign seg_display_o = 'b0;

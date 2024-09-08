@@ -11,7 +11,7 @@ module led_kitt #(
 ) (
     input              clk_i,
     input              rstn_i,
-    output logic [7:0] display_o
+    output logic [7:0] led_display_o
 );
 
 
@@ -69,8 +69,8 @@ module led_kitt #(
 
   // Display Decoder
   always_ff @(posedge clk_i, negedge rstn_i) begin : dsply_dcdr
-    if (!rstn_i) display_o <= 'b0;
-    else display_o <= LED_POLARITY ? LEDDecoder[display_counter] : ~LEDDecoder[display_counter];
+    if (!rstn_i) led_display_o <= 'b0;
+    else led_display_o <= LED_POLARITY ? LEDDecoder[display_counter] : ~LEDDecoder[display_counter];
   end : dsply_dcdr
 
 endmodule
