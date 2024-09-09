@@ -1,7 +1,7 @@
 `include "lscc_defines.svh"
 
 // Instantiate driver based on board
-module led_driver_top #( BOARD   = "" )
+module led_driver_top #( string BOARD = "" )
 (
   input              clk_i,
   input              rstn_i,
@@ -35,9 +35,9 @@ module led_driver_top #( BOARD   = "" )
           .seg_display_o,
           .seg_sel_o
         );
-        
+
         assign led_display_o = 'b0;
-        
+
       end : atg_versa
 
       // Avant E Eval Board
