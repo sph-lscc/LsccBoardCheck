@@ -1,8 +1,9 @@
-# Exclude Lattice Radiant Projects
+# Exclude Lattice Projects
 lscc/*/*
 
-# Include Radiant Project and Option definitions
+# Include Radiant & Diamond Project and Option definitions
 !lscc/*/*.rdf
+!lscc/*/*.ldf
 !lscc/*/*.sty
 
 # Sublime Data

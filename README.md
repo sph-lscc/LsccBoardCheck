@@ -10,3 +10,4 @@ Parameterised for quick porting to additional boards
 - Avant-E Eval Board (LAV-AT-E70)
 - MachXO5 Eval Board (LFMXO5-25)
 - MachXO5T Eval Board (LFMXO5-100T)
+- MachXO3 Dev Board (LFMXO3-9400)

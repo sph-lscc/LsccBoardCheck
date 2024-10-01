@@ -36,6 +36,7 @@ module led_driver_top #( string BOARD = "" )
           .seg_sel_o
         );
 
+        // Unused Outputs
         assign led_display_o = 'b0;
 
       end : atg_versa
@@ -95,10 +96,28 @@ module led_driver_top #( string BOARD = "" )
             .led_display_o
         );
 
+        // Unused Outputs
         assign seg_display_o = 'b0;
         assign seg_sel_o = 3'b111;
 
       end : xo5t_eval
+
+      // MachXO3 Development Board
+      "XO3_DEVBRD": begin : xo3_devbrd
+        led_kitt #(
+            .CLK_IN_MHZ  (12),  // Sourced from FTDI chip
+            .LED_POLARITY(1'b0)
+        ) led_kitt_inst (
+            .clk_i,
+            .rstn_i(rst_n),
+            .led_display_o
+        );
+
+        // Unused Outputs
+        assign seg_display_o = 'b0;
+        assign seg_sel_o = 3'b111;
+
+      end : xo3_devbrd
 
     endcase // BOARD
 
