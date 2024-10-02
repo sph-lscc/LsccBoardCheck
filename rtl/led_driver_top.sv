@@ -119,6 +119,33 @@ module led_driver_top #( string BOARD = "" )
 
       end : xo3_devbrd
 
+      // MachXO2 Break Out Board
+      "XO2_BRKOUTBRD": begin : xo2_brkoutbrd
+
+        logic osc_clk, stby_flag;
+
+        OSCH #(
+            .NOM_FREQ ("2.08")
+        ) OSCH_inst (
+            .STDBY(1'b0),    // 0=Enabled, 1=Disabled also Disabled with Bandgap=OFF
+            .OSC(osc_clk),
+            .SEDSTDBY());
+
+        led_kitt #(
+            .CLK_IN_MHZ  (2),  // Sourced from Oscillator
+            .LED_POLARITY(1'b0)
+        ) led_kitt_inst (
+            .clk_i (osc_clk),
+            .rstn_i(1'b1),
+            .led_display_o
+        );
+
+        // Unused Outputs
+        assign seg_display_o = 'b0;
+        assign seg_sel_o = 3'b111;
+
+      end : xo2_brkoutbrd
+
     endcase // BOARD
 
   endgenerate
