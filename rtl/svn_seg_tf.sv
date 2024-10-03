@@ -17,10 +17,10 @@ module svn_seg_tf();
   // Instantiate the UUT
   // Please check and add your parameters manually
   svn_seg_cntr UUT (
-    .clk_i(clk_i), 
-    .rstn_i(rstn_i), 
+    .clk_i(clk_i),
+    .rstn_i(rstn_i),
     .display_o(display_o),
-	.seg_sel_o() 
+    .seg_sel_o()
   );
 
   // System clock
@@ -42,4 +42,4 @@ module svn_seg_tf();
   //GSR GSR_INST (.GSR(rstn_i));
   //PUR PUR_INST (.PUR(rstn_i));
 
-endmodule 
+endmodule

@@ -39,7 +39,7 @@ module led_kitt #(
   // Signal Declarations
 
   logic [$clog2(SysFreq)-1:0] prescaler, prescaler_tc;
-  logic [3:0] display_counter;
+  logic [3:0] led_counter;
 
   // Module Behaviour
 
@@ -61,16 +61,16 @@ module led_kitt #(
 
 `endif
 
-  // Display Counter - Increment once per prescaler pulse to value 13
-  always_ff @(posedge clk_i, negedge rstn_i) begin : dsply_cntr
-    if (!rstn_i) display_counter <= 'b0;
-    else if (prescaler_tc) display_counter <= display_counter > 12 ? 'b0 : display_counter + 1'b1;
-  end : dsply_cntr
-
-  // Display Decoder
+  // Display Decoder - Increment once per prescaler pulse to value 13; decode value
   always_ff @(posedge clk_i, negedge rstn_i) begin : dsply_dcdr
-    if (!rstn_i) led_display_o <= 'b0;
-    else led_display_o <= LED_POLARITY ? LEDDecoder[display_counter] : ~LEDDecoder[display_counter];
+    if (!rstn_i) begin
+      led_counter   <= 'b0;
+      led_display_o <= 'b0;
+    end
+    else if (prescaler_tc) begin
+      led_counter   <= led_counter > 12 ? 'b0 : led_counter + 1'b1;
+      led_display_o <= LED_POLARITY ? LEDDecoder[led_counter] : ~LEDDecoder[led_counter];
+    end
   end : dsply_dcdr
 
 endmodule

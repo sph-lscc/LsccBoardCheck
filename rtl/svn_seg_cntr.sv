@@ -37,7 +37,7 @@ module svn_seg_cntr #(
   // Signal Declarations
 
   logic [$clog2(SysFreq)-1:0] prescaler, prescaler_tc;
-  logic [                3:0] display_counter;
+  logic [                3:0] seg_counter;
 
   // Module Behaviour
 
@@ -59,14 +59,12 @@ module svn_seg_cntr #(
 
 `endif
 
-  // Display Counter - Increment once per prescaler pulse
-  always_ff @(posedge clk_i) begin : dsply_cntr
-    if (prescaler_tc) display_counter <= display_counter + 1;
-  end : dsply_cntr
-
-  // Display Decoder - binary to 7 seg display
+  // Display Decoder - Increment once per prescaler pulse & decode result
   always_ff @(posedge clk_i) begin : dsply_dcdr
-    seg_display_o <= LED_POLARITY ? SEG7DISP[display_counter] : ~SEG7DISP[display_counter];
+    if (prescaler_tc) begin
+      seg_counter   <= seg_counter + 1;
+      seg_display_o <= LED_POLARITY ? SEG7DISP[seg_counter] : ~SEG7DISP[seg_counter];
+    end
   end : dsply_dcdr
 
   // Enable ALL digits of 3 x 7seg display
