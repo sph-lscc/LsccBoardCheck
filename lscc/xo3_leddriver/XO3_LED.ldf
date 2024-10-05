@@ -3,7 +3,7 @@
     <Options/>
     <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
         <Options HDL_PARAM="BOARD=&quot;XO3_DEVBRD&quot;" VerilogStandard="System Verilog" def_top="led_driver_top">
-            <Option name="include path" value="../../utils/rtl;../../utils/hdr"/>
+            <Option name="include path" value="../../lib/hdr"/>
         </Options>
         <Source name="../../rtl/led_driver_top.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog" top_module="led_driver_top"/>
@@ -11,7 +11,7 @@
         <Source name="../../rtl/led_kitt.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
         </Source>
-        <Source name="../../utils/rtl/sync_rstn.sv" type="Verilog" type_short="Verilog">
+        <Source name="../../lib/rtl/sync_rstn.sv" type="Verilog" type_short="Verilog">
             <Options VerilogStandard="System Verilog"/>
         </Source>
         <Source name="../../ldc/cst_XO3_devbrd.lpf" type="Logic Preference" type_short="LPF">
