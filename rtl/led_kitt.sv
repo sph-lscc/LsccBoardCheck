@@ -14,7 +14,6 @@ module led_kitt #(
     output logic [7:0] led_display_o
 );
 
-
   // Local Parameters
 
   localparam bit [13:0][7:0] LEDDecoder = {
@@ -35,11 +34,13 @@ module led_kitt #(
   };
 
   localparam int SysFreq = CLK_IN_MHZ * 1000 * 1000 / 14;
+  localparam int PsWidth = $clog2(SysFreq);
 
   // Signal Declarations
 
-  logic [$clog2(SysFreq)-1:0] prescaler, prescaler_tc;
-  logic [3:0] led_counter;
+  logic [        3:0] led_counter;
+  logic [PsWidth-1:0] prescaler;
+  logic               prescaler_tc;
 
   // Module Behaviour
 
@@ -48,7 +49,7 @@ module led_kitt #(
   // Prescaler generates 1Hz pulse to enable display counter
   always_ff @(posedge clk_i, negedge rstn_i) begin : prescale
     if (!rstn_i) prescaler <= 'b0;
-    else prescaler <= prescaler_tc ? 'b0 : prescaler + 1'b1;
+    else prescaler <= prescaler_tc ? 'b0 : prescaler + 'b1;
   end : prescale
 
   assign prescaler_tc = (prescaler == SysFreq - 1);
@@ -56,7 +57,7 @@ module led_kitt #(
 `else
 
   // Disable prescaler for simulation
-  assign prescaler    = 'b0;
+  assign prescaler    =  'b0;
   assign prescaler_tc = 1'b1;
 
 `endif
@@ -68,7 +69,7 @@ module led_kitt #(
       led_display_o <= 'b0;
     end
     else if (prescaler_tc) begin
-      led_counter   <= led_counter > 12 ? 'b0 : led_counter + 1'b1;
+      led_counter   <= led_counter > 4'hC ? 4'h0 : led_counter + 4'h1;
       led_display_o <= LED_POLARITY ? LEDDecoder[led_counter] : ~LEDDecoder[led_counter];
     end
   end : dsply_dcdr

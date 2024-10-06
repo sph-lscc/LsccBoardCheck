@@ -12,32 +12,34 @@ module svn_seg_cntr #(
 
   // Local parameters & Constants
 
-  // 7 Segment display decoder
-  localparam bit [15:0][7:0] SEG7DISP = {
-    8'b01110001,
-    8'b01111001,
-    8'b01011110,
-    8'b00111001,
-    8'b01111100,
-    8'b01110111,
-    8'b01101111,
-    8'b01111111,
-    8'b00000111,
-    8'b01111101,
-    8'b01101101,
-    8'b01100110,
-    8'b01001111,
-    8'b01011011,
-    8'b00000110,
-    8'b10111111
+  // 7 Segment display decoder (16x8 ROM)
+  localparam bit [15:0][7:0] Seg7Disp = {
+    8'b01110001, //F
+    8'b01111001, //E
+    8'b01011110, //D
+    8'b00111001, //C
+    8'b01111100, //B
+    8'b01110111, //A
+    8'b01101111, //9
+    8'b01111111, //8
+    8'b00000111, //7
+    8'b01111101, //6
+    8'b01101101, //5
+    8'b01100110, //4
+    8'b01001111, //3
+    8'b01011011, //2
+    8'b00000110, //1
+    8'b10111111  //0.
   };
 
   localparam int SysFreq = CLK_IN_MHZ * 1000 * 1000;
+  localparam int PsWidth = $clog2(SysFreq);
 
   // Signal Declarations
 
-  logic [$clog2(SysFreq)-1:0] prescaler, prescaler_tc;
-  logic [                3:0] seg_counter;
+  logic [PsWidth-1:0] prescaler;
+  logic               prescaler_tc;
+  logic [        3:0] seg_counter;
 
   // Module Behaviour
 
@@ -46,7 +48,7 @@ module svn_seg_cntr #(
   // Prescaler generates 1Hz pulse to enable display counter
   always_ff @(posedge clk_i, negedge rstn_i) begin : prescale
     if (!rstn_i) prescaler <= 'b0;
-    else prescaler <= prescaler_tc ? 'b0 : prescaler + 1;
+    else prescaler <= prescaler_tc ? 'b0 : prescaler + 'b1;
   end : prescale
 
   assign prescaler_tc = (prescaler == SysFreq - 1);
@@ -59,11 +61,11 @@ module svn_seg_cntr #(
 
 `endif
 
-  // Display Decoder - Increment once per prescaler pulse & decode result
+  // Display Decoder - Increment once per prescaler pulse & decode seg_counter value
   always_ff @(posedge clk_i) begin : dsply_dcdr
     if (prescaler_tc) begin
-      seg_counter   <= seg_counter + 1;
-      seg_display_o <= LED_POLARITY ? SEG7DISP[seg_counter] : ~SEG7DISP[seg_counter];
+      seg_counter   <= seg_counter + 'b1;
+      seg_display_o <= LED_POLARITY ? Seg7Disp[seg_counter] : ~Seg7Disp[seg_counter];
     end
   end : dsply_dcdr
 
