@@ -1,7 +1,7 @@
 `include "lscc_defines.svh"
 
 // Instantiate driver based on board
-module led_driver_top #( string BOARD = "" )
+module led_driver #( string BOARD = "" )
 (
   input              clk_i,
   input              rstn_i,
@@ -146,12 +146,14 @@ module led_driver_top #( string BOARD = "" )
 
         logic osc_clk, stby_flag;
 
+        /* verilator lint_off WIDTHEXPAND */
         OSCH #(
             .NOM_FREQ ("2.08")
         ) OSCH_inst (
             .STDBY(1'b0),    // 0=Enabled, 1=Disabled also Disabled with Bandgap=OFF
             .OSC(osc_clk),
-            .SEDSTDBY());
+            .SEDSTDBY(stby_flag));
+        /* verilator lint_on WIDTHEXPAND */
 
         led_kitt #(
             .CLK_IN_MHZ  (2),  // Sourced from Oscillator
