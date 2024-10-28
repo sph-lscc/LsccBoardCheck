@@ -48,7 +48,7 @@ module svn_seg_cntr #(
   // Prescaler generates 1Hz pulse to enable display counter
   always_ff @(posedge clk_i, negedge rstn_i) begin : prescale
     if (!rstn_i) prescaler <= 'b0;
-    else prescaler <= prescaler_tc ? 'b0 : prescaler + 'b1;
+    else prescaler <= prescaler_tc ? 'd0 : prescaler + 'd1;
   end : prescale
 
   assign prescaler_tc = (prescaler == SysFreq - 1);
@@ -64,7 +64,7 @@ module svn_seg_cntr #(
   // Display Decoder - Increment once per prescaler pulse & decode seg_counter value
   always_ff @(posedge clk_i) begin : dsply_dcdr
     if (prescaler_tc) begin
-      seg_counter   <= seg_counter + 'b1;
+      seg_counter   <= seg_counter + 4'h1;
       seg_display_o <= LED_POLARITY ? Seg7Disp[seg_counter] : ~Seg7Disp[seg_counter];
     end
   end : dsply_dcdr
