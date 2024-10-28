@@ -3,7 +3,7 @@
     <Options/>
     <Implementation title="impl_1" dir="impl_1" description="impl_1" synthesis="synplify" default_strategy="Strategy1">
         <Options HDL_PARAM="BOARD=&quot;CPNX_VERSA&quot;" VerilogStandard="System Verilog" def_top="led_driver" hdl_sort="off">
-            <Option name="include path" value="../../lib/hdr"/>
+            <Option name="include path" value="../../lib/svh"/>
             <Option name="top" value="led_driver"/>
         </Options>
         <Source name="BrdChk_CPNX.sv" type="Verilog" type_short="Verilog" excluded="TRUE">
