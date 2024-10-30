@@ -1,7 +1,13 @@
 #!/bin/sh
 
 # Setup
-VERILATOR_ROOT=/opt/verilator
+if [ $(uname) = 'Darwin' ] ; then
+  VERILATOR_ROOT=/opt/homebrew
+  CORES=`sysctl -n hw.ncpu`
+else
+  VERILATOR_ROOT=/opt/verilator
+  CORES=`nproc`
+fi
 
 
 # Set Parameters (Ignore XO2_BRKOUTBRD - Need PMI compiling to library)
@@ -13,5 +19,5 @@ do
   echo "\n-----------------"
   echo "Board: $BRD"
   echo "-----------------"
-  $VERILATOR_ROOT/bin/verilator -threads `nproc` -GBOARD=\"$BRD\" -f sim.opt
+  $VERILATOR_ROOT/bin/verilator -threads $CORES -GBOARD=\"$BRD\" -f sim.opt
 done
