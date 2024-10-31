@@ -1,0 +1,17 @@
+# Includes
+-y ../lib/svh
+-y ../lib/rtl
+-y ../src/rtl
+
+# Compilation Options
+-Wall
+-Wno-UNUSEDSIGNAL
+
+# Parameter Definitions
+-GBOARD=\"XO3_DEVBRD\"
+
+# Command Options
+--lint-only
+
+# Source
+led_driver.sv

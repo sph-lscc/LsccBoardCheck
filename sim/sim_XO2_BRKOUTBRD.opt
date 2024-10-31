@@ -1,0 +1,19 @@
+# Includes
+-y /opt/lscc/diamond/3.14/cae_library/simulation/verilog/machxo2
+-y ../lib/svh
+-y ../lib/rtl
+-y ../src/rtl
+
+# Compilation Options
+-Wall
+-Wno-UNUSEDSIGNAL
+-Wno-WIDTH
+
+# Parameter Definitions
+-GBOARD=\"XO2_BRKOUTBRD\"
+
+# Command Options
+--lint-only
+
+# Source
+led_driver.sv

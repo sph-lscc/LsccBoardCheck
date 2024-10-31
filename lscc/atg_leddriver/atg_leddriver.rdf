@@ -3,7 +3,7 @@
     <Options/>
     <Implementation title="atg" dir="atg" description="atg" synthesis="synplify" default_strategy="Strategy1">
         <Options HDL_PARAM="BOARD=&quot;ATG_VERSA&quot;" VerilogStandard="System Verilog" def_top="led_driver">
-            <Option name="include path" value="../../lib/hdr"/>
+            <Option name="include path" value="../../lib/svh"/>
             <Option name="top" value="led_driver"/>
         </Options>
         <Source name="../../src/rtl/svn_seg_cntr.sv" type="Verilog" type_short="Verilog">

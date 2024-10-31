@@ -1,0 +1,11 @@
+# Questa Compliation Config
+
+-lint=full
+
++incdir+../lib/svh
+
+../lib/rtl/sync_rstn.sv
+../src/rtl/svn_seg_cntr.sv
+../src/rtl/led_kitt.sv
+../src/rtl/led_driver.sv
+
